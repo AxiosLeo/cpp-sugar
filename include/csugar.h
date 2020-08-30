@@ -24,12 +24,9 @@ namespace csugar {
     std::string uuid();
 
     /************************** json **************************/
-    Json::Value json_decode(std::string json);
+    Json::Value json_decode(const std::string &str);
 
-    std::string json_encode(Json::Value root);
-
-    template<typename T>
-    std::string json_encode_map(std::map<std::string, T> data);
+    std::string json_encode(const Json::Value &root);
 
     template<typename T>
     std::string json_encode_list(std::vector<T> data);
