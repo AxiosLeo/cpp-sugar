@@ -32,15 +32,20 @@ target_sources(${PROJECT_NAME}
         PRIVATE
         src/string.cpp
         src/json.cpp
+        src/map.cpp
         include/csugar.h)
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+find_package(Boost REQUIRED)
+find_package(jsoncpp REQUIRED)
+
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-        jsoncpp)
+        jsoncpp
+        boost)
 
 set_target_properties(${PROJECT_NAME}
         PROPERTIES
