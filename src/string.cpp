@@ -21,3 +21,21 @@ string csugar::uuid() {
     boost::uuids::uuid uid = boost::uuids::random_generator()();
     return boost::uuids::to_string(uid);
 }
+
+string csugar::url_encode(const std::string &str) {
+    std::ostringstream escaped;
+    escaped.fill('0');
+    escaped << hex;
+
+    for (char c: str) {
+        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+            escaped << c;
+            continue;
+        }
+        escaped << std::uppercase;
+        escaped << '%' << std::setw(2) << int((unsigned char) c);
+        escaped << nouppercase;
+    }
+
+    return escaped.str();
+}
