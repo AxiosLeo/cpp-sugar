@@ -44,8 +44,7 @@ find_package(jsoncpp REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-        jsoncpp
-        boost)
+        jsoncpp)
 
 set_target_properties(${PROJECT_NAME}
         PROPERTIES
