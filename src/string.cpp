@@ -67,3 +67,23 @@ string csugar::url_decode(const std::string &str) {
 
     return escaped.str();
 }
+
+std::vector<std::string> explode(const std::string &str, const std::string &delimiter = "") {
+    int pos = str.find(delimiter, 0);
+    int pos_start = 0;
+    int split_n = pos;
+    string line_text(delimiter);
+
+    vector<std::string> dest;
+
+    while (pos > -1) {
+        line_text = str.substr(pos_start, split_n);
+        pos_start = pos + 1;
+        pos = str.find(delimiter, pos + 1);
+        split_n = pos - pos_start;
+        dest.push_back(line_text);
+    }
+    line_text = str.substr(pos_start, str.length() - pos_start);
+    dest.push_back(line_text);
+    return dest;
+}
