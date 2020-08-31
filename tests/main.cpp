@@ -17,6 +17,14 @@ TEST(tests_string, test_uppercase) {
     ASSERT_EQ("TEST", uppercase("test"));
 }
 
+TEST(tests_string, test_url_encode) {
+    ASSERT_EQ("a%26%2F%21%20%24%23%28%2A.%2B0%29", url_encode("a&/! $#(*.+0)"));
+}
+
+TEST(tests_string, test_url_decode) {
+    ASSERT_EQ("a&/! $#(*.+0)", url_decode("a%26%2F%21%20%24%23%28%2A.%2B0%29"));
+}
+
 TEST(tests_json, test_json_decode) {
     std::string json = R"({"foo":"bar"})";
     Json::Value rest = json_decode(json);
