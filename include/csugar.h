@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <json/json.h>
+#include <iterator>
 
 namespace csugar {
     /************************** string **************************/
@@ -14,14 +15,15 @@ namespace csugar {
 
     std::string upper_first_case(std::string str);
 
-    std::string url_encode(std::string str);
+    std::string url_encode(const std::string& str);
 
-    std::string url_decode(std::string str);
-
-    template<typename T>
-    std::string build_http_query(std::map<std::string, T> query);
+    std::string url_decode(const std::string& str);
 
     std::string uuid();
+
+    std::vector<std::string> explode(const std::string &str, const std::string &delimiter = "");
+
+    std::string implode(const std::vector<std::string> &vec, const std::string &glue = "");
 
     /************************** json **************************/
     Json::Value json_decode(const std::string &str);
