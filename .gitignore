@@ -124,3 +124,4 @@ dkms.conf
 .idea/
 cmake-build-debug/*
 cmake-build/*
+cmake_build/DartConfiguration.tcl
