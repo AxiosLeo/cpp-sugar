@@ -4,6 +4,7 @@
 #include <iostream>
 #include <json/json.h>
 #include <iterator>
+#include <vector>
 
 namespace csugar {
     /************************** string **************************/

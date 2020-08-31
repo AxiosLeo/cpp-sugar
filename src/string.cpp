@@ -68,13 +68,13 @@ string csugar::url_decode(const std::string &str) {
     return escaped.str();
 }
 
-std::vector<std::string> explode(const std::string &str, const std::string &delimiter = "") {
+std::vector<std::string> csugar::explode(const std::string &str, const std::string &delimiter) {
     int pos = str.find(delimiter, 0);
     int pos_start = 0;
     int split_n = pos;
     string line_text(delimiter);
 
-    vector<std::string> dest;
+    std::vector<std::string> dest;
 
     while (pos > -1) {
         line_text = str.substr(pos_start, split_n);
@@ -86,4 +86,18 @@ std::vector<std::string> explode(const std::string &str, const std::string &deli
     line_text = str.substr(pos_start, str.length() - pos_start);
     dest.push_back(line_text);
     return dest;
+}
+
+std::string csugar::implode(const std::vector<std::string> &vec, const std::string &glue) {
+    string res;
+    int n = 0;
+    for (const auto &str:vec) {
+        if (n == 0) {
+            res = str;
+        } else {
+            res += glue + str;
+        }
+        n++;
+    }
+    return res;
 }
