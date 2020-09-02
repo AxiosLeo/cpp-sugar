@@ -45,3 +45,12 @@ TEST(tests_json, test_json) {
     ASSERT_EQ("bar", rest["foo"].asString());
     ASSERT_EQ(json, json_encode(rest));
 }
+
+TEST(tests_datetime, test_datetime) {
+    std::string now = utc_datetime();
+    std::string gmt_datetime = "2020-08-08T08:08:08Z";
+    time_t t = strtotime(gmt_datetime);
+    ASSERT_EQ(1596874088, t);
+    std::string res = utc_datetime(t);
+    ASSERT_EQ(gmt_datetime, res);
+}

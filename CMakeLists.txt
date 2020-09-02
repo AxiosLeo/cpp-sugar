@@ -32,6 +32,7 @@ target_sources(${PROJECT_NAME}
         PRIVATE
         src/string.cpp
         src/json.cpp
+        src/datetime.cpp
         include/csugar.h)
 
 target_include_directories(${PROJECT_NAME}

@@ -16,9 +16,9 @@ namespace csugar {
 
     std::string upper_first_case(std::string str);
 
-    std::string url_encode(const std::string& str);
+    std::string url_encode(const std::string &str);
 
-    std::string url_decode(const std::string& str);
+    std::string url_decode(const std::string &str);
 
     std::string uuid();
 
@@ -31,11 +31,10 @@ namespace csugar {
 
     std::string json_encode(const Json::Value &root);
 
-    template<typename T>
-    std::string json_encode_list(std::vector<T> data);
-
     /************************** datetime **************************/
-    std::string gmt_datetime(time_t time = NULL); // 2020-08-08T08:08:08Z
+    std::string utc_datetime(time_t time = NULL); // 2020-08-08T08:08:08Z
+
+    time_t strtotime(const std::string &gmt_datetime);
 
     /************************** crypt **************************/
     std::string hmacsha1(std::string content, std::string key);
