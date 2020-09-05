@@ -23,8 +23,7 @@ main() {
 
 error_exit() {
     echo
-    # shellcheck disable=SC2145
-    echo "Error: $@"
+    echo Error: "$@"
     echo "----------------------------------------------------------------------"
     echo
     exit 1
