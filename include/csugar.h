@@ -26,6 +26,8 @@ namespace csugar {
 
     std::string implode(const std::vector<std::string> &vec, const std::string &glue = "");
 
+    std::string build_http_query(const std::map<std::string, std::string>& query);
+
     /************************** json **************************/
     Json::Value json_decode(const std::string &str);
 
@@ -34,7 +36,7 @@ namespace csugar {
     /************************** datetime **************************/
     std::string utc_datetime(time_t time = NULL); // 2020-08-08T08:08:08Z
 
-    time_t strtotime(const std::string &gmt_datetime);
+    time_t utc_strtotime(const std::string &gmt_datetime);
 
     /************************** crypt **************************/
     std::string hmacsha1(std::string content, std::string key);
