@@ -1,3 +1,8 @@
+.idea/
+cmake-build-debug/
+cmake_build/
+build/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### VisualStudioCode template
 .vscode/*
@@ -120,8 +125,3 @@ dkms.conf
 ### Ninja template
 .ninja_deps
 .ninja_log
-
-.idea/
-cmake-build-debug/*
-cmake-build/*
-cmake_build/DartConfiguration.tcl
