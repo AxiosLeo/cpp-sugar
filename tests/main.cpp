@@ -9,13 +9,9 @@ int main(int argc, char **argv) {
   return RUN_ALL_TESTS();
 }
 
-TEST(tests_string, test_lowercase) {
-  ASSERT_EQ("test", lowercase("TEST"));
-}
+TEST(tests_string, test_lowercase) { ASSERT_EQ("test", lowercase("TEST")); }
 
-TEST(tests_string, test_uppercase) {
-  ASSERT_EQ("TEST", uppercase("test"));
-}
+TEST(tests_string, test_uppercase) { ASSERT_EQ("TEST", uppercase("test")); }
 
 TEST(tests_string, test_url_encode) {
   ASSERT_EQ("a%26%2F%21%20%24%23%28%2A.%2B0%29", url_encode("a&/! $#(*.+0)"));
@@ -57,10 +53,8 @@ TEST(tests_datetime, test_datetime) {
 
 TEST(tests_string, build_http_query) {
   map<string, string> query = {
-      {"foo", "bar"},
-      {"em", ""},
-      {"link", "http://example.com?foo=bar"}
-  };
+      {"foo", "bar"}, {"em", ""}, {"link", "http://example.com?foo=bar"}};
 
-  ASSERT_EQ(string("em=&foo=bar&link=http%3A%2F%2Fexample.com%3Ffoo%3Dbar"), build_http_query(query));
+  ASSERT_EQ(string("em=&foo=bar&link=http%3A%2F%2Fexample.com%3Ffoo%3Dbar"),
+            build_http_query(query));
 }

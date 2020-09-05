@@ -35,7 +35,7 @@ string csugar::url_encode(const std::string &str) {
       continue;
     }
     escaped << std::uppercase;
-    escaped << '%' << std::setw(2) << int((unsigned char) c);
+    escaped << '%' << std::setw(2) << int((unsigned char)c);
     escaped << nouppercase;
   }
 
@@ -106,9 +106,10 @@ std::string csugar::implode(const std::vector<std::string> &vec,
   return res;
 }
 
-std::string csugar::build_http_query(const std::map<std::string, std::string>& query) {
+std::string
+csugar::build_http_query(const std::map<std::string, std::string> &query) {
   vector<string> v;
-  for (const auto &it:query) {
+  for (const auto &it : query) {
     string i(it.first + "=" + url_encode(it.second));
     v.push_back(i);
   }
