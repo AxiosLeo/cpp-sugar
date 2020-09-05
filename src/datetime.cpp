@@ -8,7 +8,7 @@ std::string csugar::utc_datetime(time_t time) {
   return buf;
 }
 
-time_t csugar::strtotime(const std::string &gmt_datetime) {
+time_t csugar::utc_strtotime(const std::string &gmt_datetime) {
   std::string datetime = gmt_datetime.substr(0, gmt_datetime.size() - 1);
   boost::posix_time::ptime pt(
       boost::posix_time::from_iso_extended_string(datetime));
