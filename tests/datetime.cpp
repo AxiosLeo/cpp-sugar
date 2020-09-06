@@ -5,7 +5,6 @@ using namespace csugar;
 
 TEST(tests_datetime, test_utc_datetime) {
   std::string now = utc_datetime();
-  printf("%s", now.c_str());
   std::string gmt_datetime = "2020-08-08T08:08:08Z";
   time_t t = utc_strtotime(gmt_datetime);
   ASSERT_EQ(1596874088, t);

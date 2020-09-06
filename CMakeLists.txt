@@ -68,7 +68,7 @@ if (ENABLE_UNIT_TESTS)
     include(CTest)
     enable_testing()
     add_executable(tests
-            tests/main.cpp tests/datetime.cpp)
+            tests/main.cpp tests/datetime.cpp tests/string.cpp)
     target_include_directories(tests
             PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/include)
