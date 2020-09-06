@@ -52,9 +52,9 @@ set_target_properties(${PROJECT_NAME}
         MACOSX_RPATH ON
         WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-find_package(Boost REQUIRED COMPONENTS thread chrono)
-find_library(CPPREST_LIB cpprest)
+SET(BOOST_MIN_VERSION "1.62.0")
 find_package(Boost REQUIRED COMPONENTS random system thread filesystem chrono atomic date_time regex)
+find_library(CPPREST_LIB cpprest)
 find_package(OpenSSL 1.0.0 REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}

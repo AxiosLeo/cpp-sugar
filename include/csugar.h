@@ -34,7 +34,7 @@ Json::Value json_decode(const std::string &str);
 std::string json_encode(const Json::Value &root);
 
 /************************** datetime **************************/
-std::string utc_datetime(const time_t &time = NULL); // 2020-08-08T08:08:08Z
+std::string utc_datetime(const time_t &time = 0); // 2020-08-08T08:08:08Z
 
 time_t utc_strtotime(const std::string &utc_datetime);
 

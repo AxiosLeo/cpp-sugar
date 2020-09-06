@@ -1,6 +1,7 @@
 #include <csugar.h>
 #include <iostream>
 #include <json/json.h>
+#include <memory>
 
 using namespace std;
 

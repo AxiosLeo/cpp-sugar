@@ -1,4 +1,5 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/time_parsers.hpp>
 #include <csugar.h>
 #include <ctime>
 
@@ -19,7 +20,7 @@ time_t csugar::utc_strtotime(const std::string &utc_datetime) {
 }
 
 long csugar::timestamp() {
-  boost::posix_time::ptime pt(boost::posix_time::from_time_t(NULL));
+  boost::posix_time::ptime pt;
   boost::posix_time::time_duration du = boost::posix_time::second_clock::universal_time() - pt;
   return du.total_seconds();
 }

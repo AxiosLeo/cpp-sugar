@@ -1,9 +1,9 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
-#include <cstdlib>
 #include <csugar.h>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -25,7 +25,7 @@ string csugar::uuid() {
 }
 
 string csugar::url_encode(const std::string &str) {
-  std::ostringstream escaped;
+  std::stringstream escaped;
   escaped.fill('0');
   escaped << hex;
 
@@ -48,7 +48,7 @@ char from_hex(char ch) {
 
 string csugar::url_decode(const std::string &str) {
   char h;
-  ostringstream escaped;
+  stringstream escaped;
   escaped.fill('0');
 
   for (auto i = str.begin(), n = str.end(); i != n; ++i) {
