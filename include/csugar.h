@@ -5,6 +5,7 @@
 #include <json/json.h>
 #include <iterator>
 #include <vector>
+#include <boost/any.hpp>
 
 namespace csugar {
 /************************** string **************************/
@@ -33,6 +34,8 @@ Json::Value json_decode(const std::string &str);
 
 std::string json_encode(const Json::Value &root);
 
+std::string json_encode(const boost::any &val);
+
 /************************** datetime **************************/
 std::string utc_datetime(const time_t &time = 0); // 2020-08-08T08:08:08Z
 
@@ -40,7 +43,7 @@ time_t utc_strtotime(const std::string &utc_datetime);
 
 long timestamp();
 
-std::string datetime(long timestamp, std::string format = "%F %T");
+std::string datetime(const std::string &format, long timestamp = NULL);
 
 /************************** crypt **************************/
 std::string hmacsha1(std::string content, std::string key);
