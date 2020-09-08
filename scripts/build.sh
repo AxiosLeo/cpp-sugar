@@ -1,6 +1,7 @@
 #!/bin/bash
 
-basepath=$(cd `dirname $0`/../; pwd)
+currpath=$(dirname "$0")
+basepath=$(cd "$currpath/../" || exit; pwd)
 
 cd $basepath/ || exit
 

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-basepath=$(cd `dirname $0`/../; pwd)
+currpath=$(dirname "$0")
+basepath=$(cd "$currpath/../" || exit; pwd)
 
-cd $basepath/
+cd "$basepath/" || exit
 
 main() {
     mkdir -p cmake_build/

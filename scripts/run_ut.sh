@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# shellcheck disable=SC2046
-basepath=$(cd $(dirname "$0")/../ || exit; pwd)
+currpath=$(dirname "$0")
+basepath=$(cd "$currpath/../" || exit; pwd)
 
 cd "$basepath"/ || exit
 
