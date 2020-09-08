@@ -17,5 +17,5 @@ TEST(tests_datetime, test_timestamp) {
 }
 
 TEST(tests_datetime, test_datetime) {
-  ASSERT_EQ(std::string("2020-08-08 08:08:08"), datetime(1596874088));
+  ASSERT_EQ(std::string("2020-08-08 08:08:08"), datetime("%F %T",1596874088));
 }
