@@ -10,13 +10,10 @@ std::string csugar::utc_datetime(const time_t &time) {
 }
 
 time_t csugar::utc_strtotime(const std::string &utc_datetime) {
-  std::string datetime = utc_datetime.substr(0, utc_datetime.size() - 1);
-  boost::posix_time::ptime pt(
-      boost::posix_time::from_iso_extended_string(datetime));
-  const boost::posix_time::ptime epoch = boost::posix_time::from_time_t(0);
-  boost::posix_time::time_duration duration = pt - epoch;
-  time_t t = duration.total_seconds();
-  return t;
+  struct tm tm{};
+  strptime(utc_datetime.c_str(), "%Y-%m-%dT%H:%M:%SZ", &tm);
+  time_t t = timegm(&tm);
+  return boost::lexical_cast<long long>(t);
 }
 
 long csugar::timestamp() {
@@ -25,7 +22,7 @@ long csugar::timestamp() {
   return du.total_seconds();
 }
 
-std::string csugar::datetime(long timestamp, std::string format) {
+std::string csugar::datetime(const std::string &format, long timestamp) {
   time_t t = timestamp;
   ctime(&t);
   char buf[80];
