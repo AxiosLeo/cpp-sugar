@@ -2,6 +2,7 @@
 #include <iostream>
 #include <json/json.h>
 #include <memory>
+#include <boost/variant.hpp>
 
 using namespace std;
 
