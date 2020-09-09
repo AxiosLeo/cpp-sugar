@@ -43,7 +43,7 @@ time_t utc_strtotime(const std::string &utc_datetime);
 
 long timestamp();
 
-std::string datetime(const std::string &format, long timestamp = NULL);
+std::string datetime(const std::string &format, long timestamp = 0);
 
 /************************** crypt **************************/
 std::string hmacsha1(std::string content, std::string key);
