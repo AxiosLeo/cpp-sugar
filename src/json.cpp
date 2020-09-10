@@ -1,3 +1,4 @@
+#include <boost/variant.hpp>
 #include <csugar.h>
 #include <iostream>
 #include <json/json.h>

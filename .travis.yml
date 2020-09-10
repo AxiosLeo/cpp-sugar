@@ -6,7 +6,6 @@ compiler: gcc
 install:
   - sudo add-apt-repository ppa:mhier/libboost-latest -y
   - sudo apt-get update
-  - sudo apt search libboost
   - sudo apt-get install libboost-all-dev
   - sudo apt-get install lcov libcpprest-dev libcurl4-openssl-dev libssl-dev uuid-dev libjson-c-dev libjsoncpp-dev
 
