@@ -12,10 +12,8 @@ TEST(tests_datetime, test_utc_datetime) {
   ASSERT_EQ(gmt_datetime, res);
 }
 
-TEST(tests_datetime, test_timestamp) {
-  ASSERT_TRUE(timestamp() > 1599362561);
-}
+TEST(tests_datetime, test_timestamp) { ASSERT_TRUE(timestamp() > 1599362561); }
 
 TEST(tests_datetime, test_datetime) {
-  ASSERT_EQ(std::string("2020-08-08 08:08:08"), datetime("%F %T",1596874088));
+  ASSERT_EQ(std::string("2020-08-08 08:08:08"), datetime("%F %T", 1596874088));
 }
