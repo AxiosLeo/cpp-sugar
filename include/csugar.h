@@ -29,6 +29,10 @@ std::string implode(const std::vector<std::string> &vec, const std::string &glue
 
 std::string build_http_query(const std::map<std::string, std::string> &query);
 
+std::string bytes_to_string(uint8_t *bytes);
+
+uint8_t *string_to_bytes(std::string str);
+
 /************************** json **************************/
 Json::Value json_decode(const std::string &str);
 
@@ -46,7 +50,7 @@ long timestamp();
 std::string datetime(const std::string &format, long timestamp = NULL);
 
 /************************** crypt **************************/
-std::string hmacsha1(std::string content, std::string key);
+std::string hmacsha1(const std::string &content, const std::string &key);
 
 std::string hmacsha256(std::string content, std::string key);
 }

@@ -37,3 +37,10 @@ TEST(tests_string, build_http_query) {
   ASSERT_EQ(string("em=&foo=bar&link=http%3A%2F%2Fexample.com%3Ffoo%3Dbar"),
             build_http_query(query));
 }
+
+TEST(tests_string, bytes_to_string) {
+  string src = "test";
+  uint8_t *bytes = string_to_bytes(string("test"));
+  string res = bytes_to_string(bytes);
+  ASSERT_EQ(src, res);
+}

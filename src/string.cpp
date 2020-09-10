@@ -115,3 +115,11 @@ csugar::build_http_query(const std::map<std::string, std::string> &query) {
   }
   return implode(v, "&");
 }
+
+std::string csugar::bytes_to_string(uint8_t *bytes) {
+  return string(reinterpret_cast<const char *>(bytes));
+}
+
+uint8_t *csugar::string_to_bytes(std::string str) {
+  return (uint8_t *)str.data();
+}
