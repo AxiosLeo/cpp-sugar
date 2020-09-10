@@ -36,6 +36,7 @@ target_sources(${PROJECT_NAME}
         src/string.cpp
         src/json.cpp
         src/datetime.cpp
+        src/crypt.cpp
         ${headers})
 
 target_include_directories(${PROJECT_NAME}
