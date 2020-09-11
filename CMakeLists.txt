@@ -69,7 +69,10 @@ if (ENABLE_UNIT_TESTS)
     include(CTest)
     enable_testing()
     add_executable(tests
-            tests/main.cpp tests/datetime.cpp tests/string.cpp)
+            tests/main.cpp
+            tests/datetime.cpp
+            tests/string.cpp
+            tests/crypt.cpp)
     target_include_directories(tests
             PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -94,26 +97,26 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}
 set(INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
 set(INSTALL_BINDIR ${CMAKE_INSTALL_BINDIR} CACHE PATH "Installation directory for executables")
 set(INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR} CACHE PATH "Installation directory for header files")
-if(WIN32 AND NOT CYGWIN)
+if (WIN32 AND NOT CYGWIN)
     set(DEF_INSTALL_CMAKEDIR CMake)
-else()
+else ()
     set(DEF_INSTALL_CMAKEDIR share/cmake/${PROJECT_NAME})
-endif()
+endif ()
 set(INSTALL_CMAKEDIR ${DEF_INSTALL_CMAKEDIR} CACHE PATH "Installation directory for CMake files")
 
-foreach(p LIB BIN INCLUDE CMAKE)
-    file(TO_NATIVE_PATH ${CMAKE_INSTALL_PREFIX}/${INSTALL_${p}DIR} _path )
+foreach (p LIB BIN INCLUDE CMAKE)
+    file(TO_NATIVE_PATH ${CMAKE_INSTALL_PREFIX}/${INSTALL_${p}DIR} _path)
     message(STATUS "Installing ${p} components to ${_path}")
     unset(_path)
-endforeach()
+endforeach ()
 
 # Prepare RPATH
 file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
-if(APPLE)
+if (APPLE)
     set(_rpath "@loader_path/${_rel}")
-else()
+else ()
     set(_rpath "\$ORIGIN/${_rel}")
-endif()
+endif ()
 file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" install_RPATH)
 
 set_target_properties(${PROJECT_NAME}
