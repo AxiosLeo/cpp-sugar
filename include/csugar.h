@@ -52,7 +52,11 @@ std::string datetime(const std::string &format, long timestamp = 0);
 /************************** crypt **************************/
 std::string hmacsha1(const std::string &content, const std::string &key);
 
-std::string hmacsha256(std::string content, std::string key);
+std::string hmacsha256(const std::string &content, const std::string &key);
+
+std::string base64_encode(const std::string &content);
+
+std::string base64_decode(const std::string &content);
 }
 
 #endif //CPP_SUGAR_CSUGAR_H
