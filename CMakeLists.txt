@@ -9,7 +9,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 option(ENABLE_UNIT_TESTS "Enable unit tests" Off)
+
+OPTION(ENABLE_COVERAGE "Enable coverage" OFF)
+message(STATUS "Enable coverage: ${ENABLE_COVERAGE}")
+if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_BUILD_TYPE "Coverage")
+    include(CodeCoverage)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_NAME}_test coverage)
+endif ()
 
 if (CMAKE_CXX_COMPILER_LOADED)
     message(STATUS "The C++ compiler ID is: ${CMAKE_CXX_COMPILER_ID}")
@@ -68,22 +78,22 @@ if (ENABLE_UNIT_TESTS)
     message(STATUS "Enable testing")
     include(CTest)
     enable_testing()
-    add_executable(tests
+    add_executable(tests_csugar
             tests/main.cpp
             tests/datetime.cpp
             tests/string.cpp
             tests/crypt.cpp)
-    target_include_directories(tests
+    target_include_directories(tests_csugar
             PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/include)
-    target_link_libraries(tests
+    target_link_libraries(tests_csugar
             PRIVATE
             ${PROJECT_NAME}
             jsoncpp
             gtest_main
             gmock_main)
     add_test(NAME google_test
-            COMMAND $<TARGET_FILE:tests>)
+            COMMAND $<TARGET_FILE:tests_csugar>)
 endif ()
 
 message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
