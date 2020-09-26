@@ -82,7 +82,8 @@ if (ENABLE_UNIT_TESTS)
             tests/main.cpp
             tests/datetime.cpp
             tests/string.cpp
-            tests/crypt.cpp)
+            tests/crypt.cpp
+            tests/json.cpp)
     target_include_directories(tests_csugar
             PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/include)
