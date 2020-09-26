@@ -1,4 +1,3 @@
-#include <boost/variant.hpp>
 #include <csugar.h>
 #include <iostream>
 #include <json/json.h>
@@ -18,6 +17,27 @@ Json::Value csugar::json_decode(const string &str) {
     throw error_info;
   }
   return root;
+}
+
+boost::any csugar::json_decode(boost::property_tree::ptree pt) {
+  if (pt.empty()) {
+    if (pt.data() == "true") {
+      return boost::any(true);
+    } else if (pt.data() == "false") {
+      return boost::any(false);
+    }
+    return boost::any(pt.data());
+  }
+  vector<boost::any> vec;
+  map<string, boost::any> m;
+  for (const auto &it : pt) {
+    if (!it.first.empty()) {
+      m[it.first] = json_decode(it.second);
+    } else {
+      vec.push_back(json_decode(it.second));
+    }
+  }
+  return vec.empty() ? boost::any(m) : boost::any(vec);
 }
 
 string csugar::json_encode(const Json::Value &root) {

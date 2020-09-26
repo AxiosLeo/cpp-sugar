@@ -6,6 +6,8 @@
 #include <iterator>
 #include <vector>
 #include <boost/any.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 namespace csugar {
 /************************** string **************************/
@@ -35,6 +37,8 @@ uint8_t *string_to_bytes(std::string str);
 
 /************************** json **************************/
 Json::Value json_decode(const std::string &str);
+
+boost::any json_decode(boost::property_tree::ptree pt);
 
 std::string json_encode(const Json::Value &root);
 
