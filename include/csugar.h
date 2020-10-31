@@ -35,6 +35,14 @@ std::string bytes_to_string(uint8_t *bytes);
 
 uint8_t *string_to_bytes(std::string str);
 
+bool start_with(std::string src, std::string prefix);
+
+void ltrim(std::string &s);
+
+void rtrim(std::string &s);
+
+void trim(std::string &s);
+
 /************************** json **************************/
 Json::Value json_decode(const std::string &str);
 

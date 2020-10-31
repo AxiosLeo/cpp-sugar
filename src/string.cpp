@@ -123,3 +123,26 @@ std::string csugar::bytes_to_string(uint8_t *bytes) {
 uint8_t *csugar::string_to_bytes(std::string str) {
   return (uint8_t *)str.data();
 }
+
+bool csugar::start_with(std::string src, std::string prefix) {
+  auto res = std::mismatch(prefix.begin(), prefix.end(), src.begin());
+  return res.first == prefix.end();
+}
+
+void csugar::ltrim(std::string &s) {
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+            return !std::isspace(ch);
+          }));
+}
+
+void csugar::rtrim(std::string &s) {
+  s.erase(std::find_if(s.rbegin(), s.rend(),
+                       [](unsigned char ch) { return !std::isspace(ch); })
+              .base(),
+          s.end());
+}
+
+void csugar::trim(std::string &s) {
+  ltrim(s);
+  rtrim(s);
+}
