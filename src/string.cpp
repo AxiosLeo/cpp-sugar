@@ -120,7 +120,7 @@ std::string csugar::bytes_to_string(uint8_t *bytes) {
   return string(reinterpret_cast<const char *>(bytes));
 }
 
-uint8_t *csugar::string_to_bytes(std::string str) {
+uint8_t *csugar::string_to_bytes(const std::string &str) {
   return (uint8_t *)str.data();
 }
 
@@ -129,20 +129,32 @@ bool csugar::start_with(std::string src, std::string prefix) {
   return res.first == prefix.end();
 }
 
-void csugar::ltrim(std::string &s) {
+bool csugar::end_with(const std::string &src, const std::string &suffix) {
+  if (src.length() >= suffix.length()) {
+    return (0 == src.compare(src.length() - suffix.length(), suffix.length(),
+                             suffix));
+  } else {
+    return false;
+  }
+}
+
+string csugar::ltrim(std::string s) {
   s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
             return !std::isspace(ch);
           }));
+  return s;
 }
 
-void csugar::rtrim(std::string &s) {
+string csugar::rtrim(std::string s) {
   s.erase(std::find_if(s.rbegin(), s.rend(),
                        [](unsigned char ch) { return !std::isspace(ch); })
               .base(),
           s.end());
+  return s;
 }
 
-void csugar::trim(std::string &s) {
-  ltrim(s);
-  rtrim(s);
+string csugar::trim(std::string s) {
+  s = ltrim(s);
+  s = rtrim(s);
+  return s;
 }

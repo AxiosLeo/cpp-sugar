@@ -33,15 +33,17 @@ std::string build_http_query(const std::map<std::string, std::string> &query);
 
 std::string bytes_to_string(uint8_t *bytes);
 
-uint8_t *string_to_bytes(std::string str);
+uint8_t *string_to_bytes(const std::string& str);
 
 bool start_with(std::string src, std::string prefix);
 
-void ltrim(std::string &s);
+bool end_with(const std::string& src, const std::string& suffix);
 
-void rtrim(std::string &s);
+std::string ltrim(std::string s);
 
-void trim(std::string &s);
+std::string rtrim(std::string s);
+
+std::string trim(std::string s);
 
 /************************** json **************************/
 Json::Value json_decode(const std::string &str);
