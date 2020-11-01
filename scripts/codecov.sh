@@ -5,7 +5,7 @@ basepath=$(cd "$currpath/../" || exit; pwd)
 
 cd "$basepath/" || exit
 
-mkdir -p cmake_build/
+mkdir -p cmake-build-debug/
 cd "cmake_build/" || exit
 rm -rf CMakeFiles/
 cmake -DENABLE_UNIT_TESTS=ON -DENABLE_COVERAGE=ON ..

@@ -6,8 +6,8 @@ basepath=$(cd "$currpath/../" || exit; pwd)
 cd "$basepath/" || exit
 
 main() {
-    mkdir -p cmake_build/
-    cd cmake_build/ || exit
+    mkdir -p cmake-build-debug/
+    cd cmake-build-debug/ || exit
     cmake .. -DENABLE_UNIT_TESTS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local || {
         error_exit "Failed to cmake."
     }

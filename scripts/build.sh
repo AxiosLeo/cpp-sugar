@@ -6,8 +6,8 @@ basepath=$(cd "$currpath/../" || exit; pwd)
 cd $basepath/ || exit
 
 main() {
-    mkdir -p cmake_build/
-    cd cmake_build/ || exit
+    mkdir -p cmake-build-debug/
+    cd cmake-build-debug/ || exit
     cmake .. || {
         error_exit "Failed to cmake."
     }
