@@ -1,6 +1,7 @@
 message(STATUS "Install external libraries")
-
+add_subdirectory(boost)
+add_subdirectory(jsoncpp)
 if(ENABLE_UNIT_TESTS)
-    message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
+    message(STATUS "require googletest")
     add_subdirectory(googletest)
 endif()

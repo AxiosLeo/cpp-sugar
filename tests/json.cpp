@@ -7,6 +7,13 @@
 
 using namespace csugar;
 
+TEST(tests_json, test_json) {
+  std::string json = R"({"foo":"bar"})";
+  Json::Value rest = json_decode(json);
+  ASSERT_EQ("bar", rest["foo"].asString());
+  ASSERT_EQ(json, json_encode(rest));
+}
+
 TEST(tests_json, test_json_decode_to_any) {
   std::string json =
       R"({"bool":true,"foo":"bar","long":9223372036854775807,"map":{"foo":"bar"},"string":"string","vector":["foo","bar"]})";
