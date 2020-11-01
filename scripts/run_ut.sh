@@ -8,7 +8,7 @@ cd "$basepath"/ || exit
 main() {
     mkdir -p cmake-build-debug/
     cd cmake-build-debug/ || exit
-    rm -rf ./tests
+    rm -rf ./bin/
     cmake .. -DENABLE_UNIT_TESTS=ON || {
         error_exit "Failed to cmake."
     }

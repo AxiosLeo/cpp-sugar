@@ -1,46 +1,33 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 
 project(csugar VERSION "0.1.0")
+option(ENABLE_UNIT_TESTS "Enable unit tests" Off)
 
-# <<< General set up >>>
+message("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< General set up >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
-
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
-option(ENABLE_UNIT_TESTS "Enable unit tests" Off)
-
-OPTION(ENABLE_COVERAGE "Enable coverage" OFF)
-message(STATUS "Enable coverage: ${ENABLE_COVERAGE}")
-if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    set(CMAKE_BUILD_TYPE "Coverage")
-    include(CodeCoverage)
-    setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_NAME}_test coverage)
-endif ()
+message(STATUS "C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 if (CMAKE_CXX_COMPILER_LOADED)
     message(STATUS "The C++ compiler ID is: ${CMAKE_CXX_COMPILER_ID}")
     message(STATUS "The C++ compiler version is: ${CMAKE_CXX_COMPILER_VERSION}")
 endif ()
 
-list(APPEND flags "-fPIC" "-Wall")
-if (NOT WIN32)
-    list(APPEND flags "-Wextra" "-Wpedantic")
-endif ()
-
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif ()
+
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
+message("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Target set up >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
+message(STATUS "Enable coverage: ${ENABLE_COVERAGE}")
+message(STATUS "Target Name : ${PROJECT_NAME}")
 add_library(${PROJECT_NAME} SHARED "")
-
 set(headers
         include/csugar.h)
-
 target_sources(${PROJECT_NAME}
         PRIVATE
         src/string.cpp
@@ -48,11 +35,9 @@ target_sources(${PROJECT_NAME}
         src/datetime.cpp
         src/crypt.cpp
         ${headers})
-
 target_include_directories(${PROJECT_NAME}
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
 set_target_properties(${PROJECT_NAME}
         PROPERTIES
         POSITION_INDEPENDENT_CODE 1
@@ -62,41 +47,49 @@ set_target_properties(${PROJECT_NAME}
         PUBLIC_HEADER "${headers}"
         MACOSX_RPATH ON
         WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
-SET(BOOST_MIN_VERSION "1.62.0")
-find_package(Boost REQUIRED COMPONENTS random system thread filesystem chrono atomic date_time regex)
-find_library(CPPREST_LIB cpprest)
-find_package(OpenSSL 1.0.0 REQUIRED)
-
-target_link_libraries(${PROJECT_NAME}
-        PRIVATE
-        jsoncpp)
-
-add_subdirectory(external)
-
 if (ENABLE_UNIT_TESTS)
-    message(STATUS "Enable testing")
+    OPTION(ENABLE_COVERAGE "Use gcov" OFF)
+    if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        set(CMAKE_BUILD_TYPE "Coverage")
+        set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+        include(CodeCoverage)
+        setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_NAME}_test coverage)
+    endif ()
     include(CTest)
     enable_testing()
     add_executable(tests_csugar
             tests/main.cpp
-            tests/datetime.cpp
-            tests/string.cpp
             tests/crypt.cpp
-            tests/json.cpp)
+            tests/datetime.cpp
+            tests/json.cpp
+            tests/string.cpp)
+endif ()
+
+message("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< External set up >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+find_package(OpenSSL 1.0.0 REQUIRED)
+add_subdirectory(external)
+target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        jsoncpp
+        crypto
+        ${Boost_LIBRARIES})
+if (ENABLE_UNIT_TESTS)
     target_include_directories(tests_csugar
             PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/include)
     target_link_libraries(tests_csugar
             PRIVATE
             ${PROJECT_NAME}
-            jsoncpp
             gtest_main
-            gmock_main)
+            gmock_main
+            crypto
+            jsoncpp
+            ${Boost_LIBRARIES})
     add_test(NAME google_test
             COMMAND $<TARGET_FILE:tests_csugar>)
 endif ()
 
+message("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Install set up >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
 
 include(GNUInstallDirs)

@@ -6,13 +6,13 @@ basepath=$(cd "$currpath/../" || exit; pwd)
 cd "$basepath/" || exit
 
 mkdir -p cmake-build-debug/
-cd "cmake_build/" || exit
+cd "cmake-build-debug/" || exit
 rm -rf CMakeFiles/
 cmake -DENABLE_UNIT_TESTS=ON -DENABLE_COVERAGE=ON ..
 cmake --build .
 ./tests_csugar
 
-utdir="$basepath/cmake_build"
+utdir="$basepath/cmake-build-debug"
 
 cd "$utdir/" || exit
 
