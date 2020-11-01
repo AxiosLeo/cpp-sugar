@@ -44,3 +44,18 @@ TEST(tests_string, bytes_to_string) {
   string res = bytes_to_string(bytes);
   ASSERT_EQ(src, res);
 }
+
+TEST(tests_string, with) {
+  string src = "test string";
+  ASSERT_TRUE(csugar::start_with(src, "test"));
+  ASSERT_TRUE(csugar::end_with(src, "string"));
+  ASSERT_FALSE(csugar::end_with(src, "test"));
+  ASSERT_FALSE(csugar::start_with(src, "string"));
+}
+
+TEST(tests_string, trim) {
+  string str = "   test   ";
+  ASSERT_EQ(string("test   "), csugar::ltrim(str));
+  ASSERT_EQ(string("   test"), csugar::rtrim(str));
+  ASSERT_EQ(string("test"), csugar::trim(str));
+}
