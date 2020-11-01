@@ -19,6 +19,16 @@ string csugar::uppercase(string str) {
   return str;
 }
 
+string csugar::lower_first_case(string str) {
+  str[0] = std::tolower(str[0]);
+  return str;
+}
+
+string csugar::upper_first_case(std::string str) {
+  str[0] = std::toupper(str[0]);
+  return str;
+}
+
 string csugar::uuid() {
   boost::uuids::uuid uid = boost::uuids::random_generator()();
   return boost::uuids::to_string(uid);

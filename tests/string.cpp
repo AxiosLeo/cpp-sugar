@@ -8,6 +8,14 @@ TEST(tests_string, test_lowercase) { ASSERT_EQ("test", lowercase("TEST")); }
 
 TEST(tests_string, test_uppercase) { ASSERT_EQ("TEST", uppercase("test")); }
 
+TEST(tests_string, test_lower_first_case) {
+  ASSERT_EQ("tEST", lower_first_case("TEST"));
+}
+
+TEST(tests_string, test_upper_first_case) {
+  ASSERT_EQ("Test", upper_first_case("test"));
+}
+
 TEST(tests_string, test_url_encode) {
   ASSERT_EQ("a%26%2F%21%20%24%23%28%2A.%2B0%29", url_encode("a&/! $#(*.+0)"));
 }
@@ -47,15 +55,15 @@ TEST(tests_string, bytes_to_string) {
 
 TEST(tests_string, with) {
   string src = "test string";
-  ASSERT_TRUE(csugar::start_with(src, "test"));
-  ASSERT_TRUE(csugar::end_with(src, "string"));
-  ASSERT_FALSE(csugar::end_with(src, "test"));
-  ASSERT_FALSE(csugar::start_with(src, "string"));
+  ASSERT_TRUE(start_with(src, "test"));
+  ASSERT_TRUE(end_with(src, "string"));
+  ASSERT_FALSE(end_with(src, "test"));
+  ASSERT_FALSE(start_with(src, "string"));
 }
 
 TEST(tests_string, trim) {
   string str = "   test   ";
-  ASSERT_EQ(string("test   "), csugar::ltrim(str));
-  ASSERT_EQ(string("   test"), csugar::rtrim(str));
-  ASSERT_EQ(string("test"), csugar::trim(str));
+  ASSERT_EQ(string("test   "), ltrim(str));
+  ASSERT_EQ(string("   test"), rtrim(str));
+  ASSERT_EQ(string("test"), trim(str));
 }
