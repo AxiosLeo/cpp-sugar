@@ -18,5 +18,6 @@ TEST(tests_crypt, hmacsha1) {
 TEST(tests_crypt, hmacsha256) {
   std::string str = "test string";
   std::string sec = "secret";
-  ASSERT_EQ(std::string("4BQwe0aaQ947Iz5dFr9jv5l/oS4Cal2ZC5RBwlinuLY="), hmacsha256(str, sec));
+  ASSERT_EQ(std::string("4BQwe0aaQ947Iz5dFr9jv5l/oS4Cal2ZC5RBwlinuLY="),
+            hmacsha256(str, sec));
 }
