@@ -5,7 +5,7 @@
 
 std::string csugar::utc_datetime(const time_t &time) {
   char buf[80];
-  std::strftime(buf, sizeof buf, "%FT%TZ", gmtime(&time));
+  std::strftime(buf, sizeof buf, "%Y-%m-%dT%H:%M:%SZ", gmtime(&time));
   return buf;
 }
 
