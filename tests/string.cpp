@@ -51,6 +51,10 @@ TEST(tests_string, bytes_to_string) {
   uint8_t *bytes = string_to_bytes(string("test"));
   string res = bytes_to_string(bytes);
   ASSERT_EQ(src, res);
+
+  bytes = string_to_bytes(src);
+  res = bytes_to_string(bytes);
+  ASSERT_EQ(src, res);
 }
 
 TEST(tests_string, with) {

@@ -33,7 +33,7 @@ std::string build_http_query(const std::map<std::string, std::string> &query);
 
 std::string bytes_to_string(uint8_t *bytes);
 
-uint8_t *string_to_bytes(const std::string& str);
+uint8_t *string_to_bytes(std::string str);
 
 bool start_with(std::string src, std::string prefix);
 
