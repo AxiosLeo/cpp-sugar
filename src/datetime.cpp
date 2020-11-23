@@ -17,10 +17,7 @@ time_t csugar::utc_strtotime(const std::string &utc_datetime) {
 }
 
 long csugar::timestamp() {
-  boost::posix_time::ptime pt;
-  boost::posix_time::time_duration du =
-      boost::posix_time::second_clock::universal_time() - pt;
-  return du.total_seconds();
+  return static_cast<long int>(time(nullptr));
 }
 
 std::string csugar::datetime(const std::string &format, long timestamp) {
