@@ -1,0 +1,42 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+    name: C++ Test on ${{ matrix.operating-system }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use C++ CMake
+      uses: nicledomaS/cmake_build_action@v1.4
+    - name: Configure CMake
+      uses: MarkusJx/install-boost@v2.3.0
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }} 
+      with:
+        boost_version: 1.71.0
+        platform_version: 18.04
+        arch: x86
+    - name: Install dependencies
+      run: sudo apt-get install lcov libcurl4-openssl-dev libssl-dev uuid-dev libjson-c-dev libjsoncpp-dev
+    - name: Run tests
+      run: sh ./scripts/codecov.sh
+      env:
+        CPLUS_INCLUDE_PATH: "/usr/local/include/:/usr/include/jsoncpp/:/usr/local/opt/openssl/include/:/usr/lib/"
+    - uses: codecov/codecov-action@v2
+      # run: bash <(curl -s https://codecov.io/bash)
+      with:
+        fail_ci_if_error: true # optional (default = false)
+        verbose: true # optional (default = false)
